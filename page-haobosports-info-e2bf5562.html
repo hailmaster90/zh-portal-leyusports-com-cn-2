@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>好博体育 · 杂志专题</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #eef5f3;
+      color: #1f2e2c;
+      line-height: 1.6;
+      padding: 20px 0 40px;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 首页横幅 — 杂志风格的视觉区域 */
+    .hero {
+      background: linear-gradient(145deg, #1f3d3a 0%, #2c5f58 100%);
+      padding: 48px 28px;
+      border-radius: 32px 8px 32px 8px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 30px rgba(0, 40, 30, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(120, 200, 170, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #deefe9;
+      position: relative;
+      z-index: 1;
+      line-height: 1.2;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: #3c9481;
+      padding: 0 8px;
+      color: #f0faf6;
+      border-radius: 4px;
+    }
+
+    .hero-sub {
+      margin-top: 18px;
+      font-size: 1.1rem;
+      color: #bdd9d0;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+      border-left: 3px solid #48b89e;
+      padding-left: 18px;
+    }
+
+    /* 背景说明卡片 */
+    .context-card {
+      background: #ffffffd9;
+      backdrop-filter: blur(2px);
+      padding: 32px 28px;
+      border-radius: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 6px 16px rgba(30, 70, 60, 0.06);
+      border: 1px solid rgba(60, 160, 130, 0.2);
+    }
+
+    .context-card h2 {
+      font-size: 1.5rem;
+      font-weight: 450;
+      color: #1e4e44;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .context-card h2 span {
+      display: inline-block;
+      width: 6px;
+      height: 24px;
+      background: #3b9b86;
+      border-radius: 6px;
+    }
+
+    .context-card p {
+      margin-bottom: 12px;
+      font-size: 1rem;
+      color: #27433d;
+    }
+
+    /* 网格卡片 — 三段自然介绍 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 44px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 28px 8px 28px 8px;
+      padding: 28px 20px 24px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(50, 100, 80, 0.04);
+      border: 1px solid #d2e6df;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(30, 90, 70, 0.10);
+      border-color: #73bbaa;
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      display: inline-block;
+      background: #d7f0e6;
+      color: #1a5448;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 16px 4px 16px 4px;
+    }
+
+    .card h3 {
+      font-weight: 500;
+      font-size: 1.25rem;
+      margin: 14px 0 10px;
+      color: #1a4940;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2d5349;
+    }
+
+    .card p + p {
+      margin-top: 10px;
+    }
+
+    /* 页尾访问提示 — 自然融入链接 */
+    .footer-note {
+      background: #dcebe4;
+      padding: 32px 24px;
+      border-radius: 40px 12px 40px 12px;
+      margin-top: 20px;
+      text-align: center;
+      border: 1px solid #aacfc1;
+    }
+
+    .footer-note p {
+      font-size: 1.1rem;
+      color: #1b4038;
+      max-width: 700px;
+      margin: 0 auto 12px;
+    }
+
+    .footer-note a {
+      color: #155a4a;
+      background: transparent;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid #3a9b84;
+      padding-bottom: 2px;
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .footer-note a:hover {
+      color: #0a332c;
+      border-bottom-color: #1a6a59;
+    }
+
+    .footer-note .small-meta {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: #3f675d;
+      opacity: 0.7;
+    }
+
+    /* FAQ 摘要 — 迷你手风琴风格 (仅视觉) */
+    .faq-mini {
+      background: #f0f9f4;
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin: 32px 0 16px;
+      border-left: 6px solid #419f87;
+    }
+
+    .faq-mini h3 {
+      font-weight: 450;
+      font-size: 1.15rem;
+      color: #1a4a3f;
+      margin-bottom: 12px;
+    }
+
+    .faq-item {
+      padding: 10px 0;
+      border-bottom: 1px dashed #b3d4c8;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 450;
+      color: #1b5244;
+    }
+
+    .faq-a {
+      color: #2c5b4f;
+      margin-top: 4px;
+      padding-left: 12px;
+      border-left: 2px solid #80c2ae;
+      font-size: 0.92rem;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 540px) {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        padding: 28px 18px;
+      }
+
+      .context-card {
+        padding: 24px 16px;
+      }
+
+      .grid-cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .footer-note {
+        padding: 24px 16px;
+      }
+    }
+
+    /* 额外的分隔 */
+    hr {
+      border: none;
+      border-top: 1px solid #bfd9cf;
+      margin: 18px 0;
+      opacity: 0.4;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: #356b5e;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- 首页横幅 -->
+    <div class="hero">
+      <div class="hero-title">
+        运动·节奏<br>对话 <em>好博体育</em>
+      </div>
+      <div class="hero-sub">
+        一种专注力与身体语言交汇的场域，从个体感受到社群氛围，重新理解运动的表达。
+      </div>
+    </div>
+
+    <!-- 背景说明 -->
+    <div class="context-card">
+      <h2><span></span> 一个关于运动场景的观察</h2>
+      <p>在竞技与日常锻炼之间，存在着大量未被充分讨论的细节：何时发力，何时调整呼吸，如何在对抗中保持判断的清醒。这些微妙的意识流动构成了运动体验的核心。</p>
+      <p><strong>好博体育</strong> 这个名字所承载的，并非单一的平台或品牌，而是对运动多样性的关注——从球类对抗到耐力训练，从个人技巧到团队配合。它试图勾勒出更立体的运动文化版图。</p>
+      <p>我们试图通过不同视角的切片，来呈现运动背后那些真实且朴素的时刻。</p>
+    </div>
+
+    <!-- 三段自然介绍 (网格卡片) -->
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>频率与适应</h3>
+        <p>每个人的身体都有独特的节奏。无论是短距离冲刺还是长时间的有氧输出，找到属于自己的频率比盲目模仿更关键。好的运动习惯往往从倾听身体开始。</p>
+        <p>不同类型运动之间的切换，也在训练神经系统的适应能力。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>技巧积累的逻辑</h3>
+        <p>任何一项运动技能的提升，都依赖重复与反思的交替。从基础动作的打磨到战术层面的意识，进步往往呈现非线性。失误不是终点，而是调整的信号。</p>
+        <p>许多业余爱好者通过录像分析或同伴反馈，获得了明显的提升。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <h3>社群与共享</h3>
+        <p>独自训练可以磨练心性，而集体活动则带来另一种动力。运动社群的价值不仅在于竞争，更在于经验交流与互相激励。不同水平的人聚在一起，往往能碰撞出新的训练思路。</p>
+        <p>线下约球、线上讨论战术、赛后复盘——这些场景构成了运动生活的日常。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 – 简短的问答风格 -->
+    <div class="faq-mini">
+      <h3>一些常见的问题 · 摘要</h3>
+      <div class="faq-item">
+        <div class="faq-q">如何开始一项新的运动？</div>
+        <div class="faq-a">先了解基础规则与装备需求，从低强度开始，逐步增加时长。重要的是保持持续的接触，不必急于追求成绩。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">怎样避免运动中的常见损伤？</div>
+        <div class="faq-a">充分热身、重视拉伸、合理分配休息日。倾听疼痛信号，区分肌肉酸痛与关节不适。必要时咨询专业人士。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">独自练习和团队训练哪个更有效？</div>
+        <div class="faq-a">两者侧重不同。独自练习便于专注于技术细节；团队训练能提升实战应变与社交动力。交替进行往往效果更好。</div>
+      </div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+      <p>如果你对运动文化、训练方法或赛事观察保持兴趣，可以多了解 <a href="https://page-haobosports.com">好博体育</a> 中所呈现的内容与讨论。那里汇集了许多来自不同背景的实践者与思考。</p>
+      <p class="small-meta">专题 · 杂志式阅读 ｜ 自由 ｜ 在场感</p>
+    </div>
+
+    <!-- 极简分隔与版本提示 -->
+    <hr>
+    <div class="tagline" style="text-align: center; padding: 16px 0 6px;">
+      基于观察与叙述 · 不构成投资或医疗建议
+    </div>
+
+  </div>
+</body>
+</html>
