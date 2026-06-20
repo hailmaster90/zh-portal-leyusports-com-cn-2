@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jjb · 稳定的索引入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7f3ed;
+            color: #2c2b28;
+            font-family: 'Georgia', 'Noto Serif SC', 'Source Han Serif', serif;
+            line-height: 1.7;
+            padding: 1.5rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-card {
+            max-width: 860px;
+            width: 100%;
+            background: #fcfaf6;
+            border-radius: 20px;
+            padding: 2.5rem 2.2rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e8e0d6;
+        }
+
+        /* 开场短句 */
+        .opening {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #3f3a34;
+            margin-bottom: 1.6rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid #ddd5cb;
+            line-height: 1.3;
+        }
+        .opening em {
+            font-style: italic;
+            color: #7f6b58;
+        }
+
+        /* 承接段落 */
+        .intro-text {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #3e3a35;
+            text-align: justify;
+        }
+        .intro-text a {
+            color: #785e45;
+            text-decoration: none;
+            border-bottom: 1px solid #cbbaaa;
+            transition: border-color 0.2s;
+        }
+        .intro-text a:hover {
+            border-bottom-color: #785e45;
+        }
+
+        /* 特点列表 — 以引用块风格呈现 */
+        .feature-block {
+            background: #f2ece4;
+            border-left: 5px solid #b8a694;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0 2.2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .feature-block h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #4f453b;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            font-size: 0.98rem;
+            color: #3f3a33;
+        }
+        .feature-list li::before {
+            content: "▹";
+            color: #8f7a66;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .feature-list strong {
+            font-weight: 600;
+            color: #3f3329;
+        }
+
+        /* 温和的收束段落 */
+        .closing {
+            margin-top: 1.8rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e3dbd0;
+            font-size: 1rem;
+            color: #43403b;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+        .closing .tagline {
+            font-style: italic;
+            color: #6d5d4e;
+            letter-spacing: 0.01em;
+        }
+        .closing .meta-link {
+            font-size: 0.9rem;
+        }
+        .closing .meta-link a {
+            color: #785e45;
+            text-decoration: none;
+            border-bottom: 1px solid #d6c9bb;
+            transition: border-color 0.2s;
+        }
+        .closing .meta-link a:hover {
+            border-bottom-color: #785e45;
+        }
+
+        /* 提示框 (简洁) */
+        .note-box {
+            background: #f6f1ea;
+            border: 1px solid #ddd3c7;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 0.92rem;
+            color: #4e4841;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+        .note-box::before {
+            content: "ⓘ";
+            font-size: 1.2rem;
+            color: #8f7b68;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .page-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .opening {
+                font-size: 1.5rem;
+            }
+            .feature-block {
+                padding: 1.2rem 1rem;
+            }
+            .feature-list li {
+                font-size: 0.92rem;
+            }
+            .closing {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .page-card {
+                border-radius: 14px;
+                padding: 1.2rem 0.8rem;
+            }
+            .opening {
+                font-size: 1.3rem;
+            }
+            .intro-text {
+                font-size: 0.92rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-card">
+        <!-- 开场短句 -->
+        <div class="opening">
+            从一处稳定入口开始。<br>
+            <em>信息索引，理当简洁可靠。</em>
+        </div>
+
+        <!-- 承接段落：从稳定入口和页面说明的角度展开 -->
+        <div class="intro-text">
+            网站导航与资源聚合，常面临链接失效、内容冗余的困扰。<strong>一个聚焦于持续维护的索引</strong>，能减少检索成本，让注意力回到信息本身。  
+            这里既不堆砌广告，也不追逐流量标题——只提供结构清晰的分类与经过校验的指向。  
+            如果你正在寻找一个低噪音、高密度的起点，<a href="https://zh-index-jjb.com">jjb</a> 本身便是那个页面：它不承诺包罗万象，但尽量保持每一条目都可抵达、可理解。
+        </div>
+
+        <!-- 特点列表：引用块风格 -->
+        <div class="feature-block">
+            <h3>索引特点</h3>
+            <ul class="feature-list">
+                <li><strong>条目可验证</strong> — 链接定期复核，减少死链与重定向堆积</li>
+                <li><strong>层级扁平</strong> — 不设超过三级目录，降低浏览层级损耗</li>
+                <li><strong>描述克制</strong> — 每条附一句客观说明，不含诱导性话术</li>
+                <li><strong>独立维护</strong> — 无第三方投稿，避免内容掺水或商业植入</li>
+                <li><strong>夜间模式适配</strong> — 页面样式跟随系统主题，阅读不易疲劳</li>
+            </ul>
+        </div>
+
+        <!-- 提示框：类似 FAQ 摘要，但保持温和 -->
+        <div class="note-box">
+            常见疑问：页面收录范围是什么？—— 以工具、文档、社区与静态站点为主，不收录需登录的论坛或专有平台。索引更新频率约为每两周一轮。
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="closing">
+            <span class="tagline">— 入口的意义，在于你记得它时，它还在。</span>
+            <span class="meta-link"><a href="https://zh-index-jjb.com">jjb</a> · 稳定索引</span>
+        </div>
+    </div>
+</body>
+</html>
